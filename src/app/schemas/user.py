@@ -1,21 +1,21 @@
 from pydantic import BaseModel
 
 from .mixins import (
-    EmailMixin,
     FromAttributesMixin,
     FullNameMixin,
     IntIdMixin,
     PasswordMixin,
+    PhoneNumberMixin,
 )
 
 
-class UserBase(FullNameMixin, EmailMixin):
+class UserBase(FullNameMixin, PhoneNumberMixin):
     pass
 
 
 class UserRead(IntIdMixin, FromAttributesMixin):
     full_name: str
-    email: str
+    phone_number: str
     is_verified: bool = False
     role: str
 
@@ -30,7 +30,7 @@ class UserCreateInternal(UserCreate):
 
 class UserUpdate(BaseModel):
     full_name: str | None = None
-    email: str | None = None
+    phone_number: str | None = None
 
 
 class UserUpdateInternal(UserUpdate):

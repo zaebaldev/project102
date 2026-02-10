@@ -1,14 +1,11 @@
-from pydantic import BaseModel, EmailStr
+from pydantic import BaseModel
+
+from .mixins import PhoneNumberMixin
 
 
 class LoginBase(BaseModel):
     password: str
 
 
-class LoginWithEmail(LoginBase):
-    email: EmailStr
-
-
-class VerifyCode(BaseModel):
-    email: EmailStr
-    code: str
+class LoginWithPhone(LoginBase, PhoneNumberMixin):
+    pass
