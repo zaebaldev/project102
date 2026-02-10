@@ -1,0 +1,26 @@
+services:
+  taskiq_tasks:
+    build:
+      context: ../
+      dockerfile: ./docker_build/app/Dockerfile
+    command: taskiq worker app.worker:broker --workers 1 --fs-discover --tasks-pattern "**/tasks"
+    env_file:
+      - ../src/.env
+    depends_on:
+      pg:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+
+  taskiq_scheduler:
+    build:
+      context: ../
+      dockerfile: ./docker_build/app/Dockerfile
+    command: taskiq scheduler app.worker:scheduler --fs-discover --tasks-pattern "**/tasks"
+    env_file:
+      - ../src/.env
+    depends_on:
+      pg:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy

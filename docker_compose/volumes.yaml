@@ -1,0 +1,4 @@
+volumes:
+  pgdata:
+  rabbitmq-data:
+  redis-data:

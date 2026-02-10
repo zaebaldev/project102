@@ -1,0 +1,18 @@
+services:
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    hostname: rabbitmq
+    env_file:
+      - ../src/.env
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+    # expose:
+    #   - "5672"
+    volumes:
+      - rabbitmq-data:/var/lib/rabbitmq
+    healthcheck:
+      test: ["CMD-SHELL", "rabbitmq-diagnostics -q ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5

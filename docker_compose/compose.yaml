@@ -1,0 +1,10 @@
+name: coffee-shop
+
+include:
+  - app.yaml
+  - postgres.yaml
+  - redis.yaml
+  - rabbitmq.yaml
+  - adminer.yaml
+  - taskiq.yaml
+  - volumes.yaml

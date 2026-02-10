@@ -1,0 +1,11 @@
+services:
+  adminer:
+    image: adminer
+    environment:
+      - ADMINER_DEFAULT_SERVER=pg
+      - ADMINER_DESIGN=dracula
+    ports:
+      - "7080:8080"
+    depends_on:
+      pg:
+        condition: service_healthy
