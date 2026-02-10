@@ -6,6 +6,7 @@ from fastapi import (
 )
 
 from app.api.dependencies.auth import AuthServiceDep, AuthServiceTxDep
+from app.rate_limiter import get_default_rate_limit, limiter
 from app.schemas.auth import LoginWithPhone
 from app.schemas.token import RefreshToken, TokenInfo
 from app.schemas.user import UserCreate, UserRead
@@ -77,6 +78,7 @@ async def register(
         },
     },
 )
+@limiter.limit(get_default_rate_limit())
 async def login(
     auth_service: AuthServiceTxDep,
     login_data: LoginWithPhone,

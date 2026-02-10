@@ -3,6 +3,7 @@ import logging
 from fastapi import FastAPI, Request, status
 from fastapi.responses import ORJSONResponse
 from pydantic import ValidationError
+from slowapi.errors import RateLimitExceeded
 from sqlalchemy.exc import DatabaseError
 
 from core.exceptions.base import AppException
@@ -11,6 +12,18 @@ log = logging.getLogger(__name__)
 
 
 def register_errors_handlers(app: FastAPI) -> None:
+    @app.exception_handler(RateLimitExceeded)
+    def handle_rate_limit_exceeded(
+        request: Request,
+        exc: RateLimitExceeded,
+    ) -> ORJSONResponse:
+        return ORJSONResponse(
+            status_code=status.HTTP_429_TOO_MANY_REQUESTS,
+            content={
+                "message": "Too many requests",
+            },
+        )
+
     @app.exception_handler(ValidationError)
     def handle_pydantic_validation_error(
         request: Request,

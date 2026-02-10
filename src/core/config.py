@@ -80,6 +80,11 @@ class CorsConfig(BaseModel):
     allow_headers: list[str] = ["*"]
 
 
+class RateLimiterConfig(BaseModel):
+    default_requests: int = 5
+    default_period: int = 60  # in seconds
+
+
 class SecuritySettings(BaseModel):
     private_key_path: Path = SOURCE_DIR / "certs" / "jwt-private.pem"
     public_key_path: Path = SOURCE_DIR / "certs" / "jwt-public.pem"
@@ -125,6 +130,7 @@ class Settings(BaseSettings):
     first_admin: FirstAdminConfig
     cors: CorsConfig = CorsConfig()
     s3_client: S3Config
+    rate_limiter: RateLimiterConfig = RateLimiterConfig()
 
 
 settings = Settings()
