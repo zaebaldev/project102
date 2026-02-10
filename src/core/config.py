@@ -61,7 +61,7 @@ class RedisConfig(BaseModel):
 
 
 class FirstAdminConfig(BaseModel):
-    email: str
+    phone_number: str
     password: str
     full_name: str
 
