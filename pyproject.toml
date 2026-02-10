@@ -14,6 +14,7 @@ alembic = "^1.17.1"
 pyjwt = { extras = ["crypto"], version = "^2.8.0" }
 bcrypt = "^4.1.1"
 redis = "^7.0.1"
+aioboto3 = "^15.5.0"
 
 [tool.poetry.group.dev.dependencies]
 pre-commit = "^4.2.0"

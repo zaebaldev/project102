@@ -66,6 +66,13 @@ class FirstAdminConfig(BaseModel):
     full_name: str
 
 
+class S3Config(BaseModel):
+    bucket_name: str = ""
+    endpoint_url: str = "https://storage.yandexcloud.net"
+    aws_access_key_id: str = ""
+    aws_secret_access_key: str = ""
+
+
 class CorsConfig(BaseModel):
     allowed_origins: list[str] = ["*"]
     allow_credentials: bool = True
@@ -117,6 +124,7 @@ class Settings(BaseSettings):
     redis: RedisConfig
     first_admin: FirstAdminConfig
     cors: CorsConfig = CorsConfig()
+    s3_client: S3Config
 
 
 settings = Settings()
