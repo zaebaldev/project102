@@ -16,7 +16,7 @@ class UserBase(FullNameMixin, PhoneNumberMixin):
 class UserRead(IntIdMixin, FromAttributesMixin):
     full_name: str
     phone_number: str
-    is_verified: bool = False
+    is_active: bool = True
     role: str
 
 
@@ -25,13 +25,12 @@ class UserCreate(UserBase, PasswordMixin):
 
 
 class UserCreateInternal(UserCreate):
-    is_verified: bool = False
+    is_active: bool = True
 
 
 class UserUpdate(BaseModel):
     full_name: str | None = None
-    phone_number: str | None = None
 
 
 class UserUpdateInternal(UserUpdate):
-    is_verified: bool | None = None
+    is_active: bool | None = None
