@@ -2,6 +2,7 @@ import logging
 
 from fastapi import (
     APIRouter,
+    Request,
     status,
 )
 
@@ -80,6 +81,7 @@ async def register(
 )
 @limiter.limit(get_default_rate_limit())
 async def login(
+    request: Request,
     auth_service: AuthServiceTxDep,
     login_data: LoginWithPhone,
 ):
